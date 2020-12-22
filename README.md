@@ -46,3 +46,37 @@ sudo systemctl enable jenkins
 ```
 sudo systemctl status jenkins
 ```
+6. Navigate to Jenkins URL on browser (http://,EC2-Instance-IP:8080)
+```
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+![jenkins1.png](images/jenkins1.png)
+
+7. Create Admin User
+
+![jenkins2.png](images/jenkins2.png)
+
+8. Create additional users
+```
+Manage Jenkins > Manage Users > Create User
+```
+
+
+# Github Configuration
+
+1. Upload Source Code to repo
+2. Create branch develop
+3. Make develop branch as the default branch
+4. Generate Tokens
+```
+1. repo - Full Permission
+2. admin:repo_hook - Full permissions
+3. admin:org_hook - Full permissions
+```
+5. Add token to Jenkins
+```
+1. Dashboard>Manage Jenkins> Manage Credentials> Jenkins > Global Credentials (unrestricted) > Add Credentials > Username/pwd
+2. Dashboard>Manage Jenkins> Manage Credentials> Jenkins > Global Credentials (unrestricted) > Add Credentials > Secret text > Token
+3. Dashboard> manage Jenkins> System Configuration > Add Github Server > Give Credentials as Jenkins-token
+```
+6. 
