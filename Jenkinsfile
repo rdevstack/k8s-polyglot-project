@@ -28,12 +28,12 @@ pipeline {
         }
         stage('push to dockerhub'){
             steps {
-                sh 'docker tag sa-frontend devopsdoor/sa-frontend'
-                sh 'docker tag sa-webapp devopsdoor/sa-webapp'
-                sh 'docker tag sa-logic devopsdoor/sa-logic'
-                sh 'docker push devopsdoor/sa-frontend'
-                sh 'docker push devopsdoor/sa-webapp'
-                sh 'docker push devopsdoor/sa-logic'
+                sh 'docker tag sa-frontend:1.0.0 devopsdoor/sa-frontend:1.0.0'
+                sh 'docker tag sa-webapp:1.0.0 devopsdoor/sa-webapp:1.0.0'
+                sh 'docker tag sa-logic:1.0.0 devopsdoor/sa-logic:1.0.0'
+                sh 'docker push devopsdoor/sa-frontend:1.0.0'
+                sh 'docker push devopsdoor/sa-webapp:1.0.0'
+                sh 'docker push devopsdoor/sa-logic:1.0.0'
             }
         }
   }
