@@ -38,7 +38,7 @@ pipeline {
                 }
             }
         }
-        stage('push to harbor'){
+        stage('push to harbor-dev'){
             when {
                 branch 'develop'
                 }
@@ -52,6 +52,7 @@ pipeline {
                 sh 'docker push harbor.postelic.com/harbor-dev/sa-logic:"$BUILD_NUMBER"'
                 }
             }
+        stage('push to harbor-prod'){
             when {
                 branch 'master'
                 }
@@ -65,6 +66,7 @@ pipeline {
                 sh 'docker push harbor.postelic.com/harbor-prod/sa-logic:"$BUILD_NUMBER"'
                 }
             }
+        }
         }
   }
 }
