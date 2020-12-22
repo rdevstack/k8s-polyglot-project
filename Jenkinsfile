@@ -1,29 +1,23 @@
 pipeline {
     agent any
     stages {
-        stage('Build Sa-Frontend') {
+        stage('Build') {
             steps {
+                sh 'echo "Building Sa-Frontend"'
                 sh 'cd ${WORKSPACE}/sa-frontend && npm install && npm run build'
-            }
-        }
-        stage('Build Sa-Webapp') {
-            steps {
+                sh 'echo "Building Sa-webapp"'
                 sh 'cd ${WORKSPACE}/sa-webapp && mvn install'
             }
         }
-        stage('Containerize sa-frontend') {
+        stage('Build Images') {
             steps {
+                sh 'echo "Creating fronted Image"'
                 sh 'cd ${WORKSPACE}/sa-frontend && docker build -t sa-frontend:"$BUILD_NUMBER" .'
-            }
-        }
-        stage('Containerize sa-Webapp') {
-            steps {
+                sh 'echo "Creating webapp Image'
                 sh 'cd ${WORKSPACE}/sa-webapp && docker build -t sa-webapp:"$BUILD_NUMBER" .'
-            }
-        }
-        stage('Containerize sa-logic') {
-            steps {
+                sh 'echo "Creating sa-logic image'
                 sh 'cd ${WORKSPACE}/sa-logic && docker build -t sa-logic:"$BUILD_NUMBER" .'
+
             }
         }
         stage('push to dockerhub'){
@@ -38,7 +32,7 @@ pipeline {
                 }
             }
         }
-        stage('push to harbor-dev'){
+        stage('push to harbor'){
             when {
                 branch 'develop'
                 }
@@ -52,8 +46,6 @@ pipeline {
                 sh 'docker push harbor.postelic.com/harbor-dev/sa-logic:"$BUILD_NUMBER"'
                 }
             }
-        }
-        stage('push to harbor-prod'){
             when {
                 branch 'master'
                 }
@@ -68,6 +60,6 @@ pipeline {
                 }
             }
         }
-        
+    }  
   }
 }
