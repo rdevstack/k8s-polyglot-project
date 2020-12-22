@@ -14,6 +14,7 @@ pipeline {
         }
         stage('Docker image') {
             steps {
+		sh 'whoami'
                 sh 'cd sa-frontend && docker build -t sa-frontend:1.0.0 .'
             }
         }
