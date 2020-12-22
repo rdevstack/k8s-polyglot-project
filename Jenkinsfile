@@ -1,7 +1,7 @@
 pipeline {
-  agent any
-  stages {
-       stage('Build Sa-Frontend') {
+    agent any
+    stages {
+        stage('Build Sa-Frontend') {
             steps {
                 sh 'cd ${WORKSPACE}/sa-frontend && npm install && npm run build'
             }
@@ -28,6 +28,7 @@ pipeline {
         }
         stage('push to dockerhub'){
             steps {
+                withDockerRegistry([ credentialsId: "dockerhub-creds", url: "" ])
                 sh 'docker tag sa-frontend:1.0.0 devopsdoor/sa-frontend:1.0.0'
                 sh 'docker tag sa-webapp:1.0.0 devopsdoor/sa-webapp:1.0.0'
                 sh 'docker tag sa-logic:1.0.0 devopsdoor/sa-logic:1.0.0'
