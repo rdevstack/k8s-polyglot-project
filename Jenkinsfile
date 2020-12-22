@@ -40,7 +40,7 @@ pipeline {
         }
         stage('push to harbor'){
             steps {
-                withDockerRegistry([ credentialsId: "harbor", url: "harbor.postelic.com" ]){
+                withDockerRegistry([ credentialsId: "harbor", url: "https://harbor.postelic.com" ]){
                 sh 'docker tag sa-frontend:"$BUILD_NUMBER" harbor.postelic.com/devopsdoor/sa-frontend:"$BUILD_NUMBER"'
                 sh 'docker tag sa-webapp:"$BUILD_NUMBER" harbor.postelic.com/devopsdoor/sa-webapp:"$BUILD_NUMBER"'
                 sh 'docker tag sa-logic:"$BUILD_NUMBER" harbor.postelic.com/devopsdoor/sa-logic:"$BUILD_NUMBER"'
