@@ -18,12 +18,12 @@ pipeline {
         }
         stage('Containerize sa-Webapp') {
             steps {
-                sh 'cd ${WORKSPACE}sa-webapp && docker build -t sa-webapp:1.0.0 .'
+                sh 'cd ${WORKSPACE}/sa-webapp && docker build -t sa-webapp:1.0.0 .'
             }
         }
         stage('Containerize sa-logic') {
             steps {
-                sh 'cd ${WORKSPACE}sa-logic && docker build -t sa-logic:1.0.0 .'
+                sh 'cd ${WORKSPACE}/sa-logic && docker build -t sa-logic:1.0.0 .'
             }
         }
         stage('push to dockerhub'){
