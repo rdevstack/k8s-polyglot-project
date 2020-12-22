@@ -39,14 +39,30 @@ pipeline {
             }
         }
         stage('push to harbor'){
+            when {
+                branch 'develop'
+                }
             steps {
                 withDockerRegistry([ credentialsId: "harbor", url: "https://harbor.postelic.com" ]){
-                sh 'docker tag sa-frontend:"$BUILD_NUMBER" harbor.postelic.com/devopsdoor/sa-frontend:"$BUILD_NUMBER"'
-                sh 'docker tag sa-webapp:"$BUILD_NUMBER" harbor.postelic.com/devopsdoor/sa-webapp:"$BUILD_NUMBER"'
-                sh 'docker tag sa-logic:"$BUILD_NUMBER" harbor.postelic.com/devopsdoor/sa-logic:"$BUILD_NUMBER"'
-                sh 'docker push harbor.postelic.com/devopsdoor/sa-frontend:"$BUILD_NUMBER"'
-                sh 'docker push harbor.postelic.com/devopsdoor/sa-webapp:"$BUILD_NUMBER"'
-                sh 'docker push harbor.postelic.com/devopsdoor/sa-logic:"$BUILD_NUMBER"'
+                sh 'docker tag sa-frontend:"$BUILD_NUMBER" harbor.postelic.com/harbor-dev/sa-frontend:"$BUILD_NUMBER"'
+                sh 'docker tag sa-webapp:"$BUILD_NUMBER" harbor.postelic.com/harbor-dev/sa-webapp:"$BUILD_NUMBER"'
+                sh 'docker tag sa-logic:"$BUILD_NUMBER" harbor.postelic.com/harbor-dev/sa-logic:"$BUILD_NUMBER"'
+                sh 'docker push harbor.postelic.com/harbor-dev/sa-frontend:"$BUILD_NUMBER"'
+                sh 'docker push harbor.postelic.com/harbor-dev/sa-webapp:"$BUILD_NUMBER"'
+                sh 'docker push harbor.postelic.com/harbor-dev/sa-logic:"$BUILD_NUMBER"'
+                }
+            }
+            when {
+                branch 'master'
+                }
+            steps {
+                withDockerRegistry([ credentialsId: "harbor", url: "https://harbor.postelic.com" ]){
+                sh 'docker tag sa-frontend:"$BUILD_NUMBER" harbor.postelic.com/harbor-prod/sa-frontend:"$BUILD_NUMBER"'
+                sh 'docker tag sa-webapp:"$BUILD_NUMBER" harbor.postelic.com/harbor-prod/sa-webapp:"$BUILD_NUMBER"'
+                sh 'docker tag sa-logic:"$BUILD_NUMBER" harbor.postelic.com/harbor-prod/sa-logic:"$BUILD_NUMBER"'
+                sh 'docker push harbor.postelic.com/harbor-prod/sa-frontend:"$BUILD_NUMBER"'
+                sh 'docker push harbor.postelic.com/harbor-prod/sa-webapp:"$BUILD_NUMBER"'
+                sh 'docker push harbor.postelic.com/harbor-prod/sa-logic:"$BUILD_NUMBER"'
                 }
             }
         }
