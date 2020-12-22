@@ -28,7 +28,7 @@ pipeline {
         }
         stage('push to dockerhub'){
             steps {
-                withDockerRegistry([ credentialsId: "dockerhub-creds", url: "" ]){
+                withDockerRegistry([ credentialsId: "dockerhub", url: "" ]){
                 sh 'docker tag sa-frontend:1.0.0 devopsdoor/sa-frontend:1.0.0'
                 sh 'docker tag sa-webapp:1.0.0 devopsdoor/sa-webapp:1.0.0'
                 sh 'docker tag sa-logic:1.0.0 devopsdoor/sa-logic:1.0.0'
