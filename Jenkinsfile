@@ -1,8 +1,7 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Build Sa-Frontend') {
+  agent any
+  stages {
+       stage('Build Sa-Frontend') {
             steps {
                 sh 'cd ${WORKSPACE}/sa-frontend && npm install && npm run build'
             }
@@ -37,8 +36,5 @@ pipeline {
                 sh 'docker push devopsdoor/sa-logic'
             }
         }
-
-        
-	}
-    }
+  }
 }
