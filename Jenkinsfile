@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh 'echo "Creating fronted Image"'
                 sh 'cd ${WORKSPACE}/sa-frontend && docker build -t sa-frontend:"$BUILD_NUMBER" .'
-                ah '"Frontend Image created'
+                sh '"Frontend Image created'
                 sh 'echo "Creating webapp Image"'
                 sh 'cd ${WORKSPACE}/sa-webapp && docker build -t sa-webapp:"$BUILD_NUMBER" .'
                 sh '"Webapp Image Created"'
