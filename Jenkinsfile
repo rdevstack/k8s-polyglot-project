@@ -29,10 +29,10 @@ pipeline {
                 }
             steps {
                 withDockerRegistry([ credentialsId: "harbor-cred", url: "http://harbor.devopsdoor.com" ]){
-                sh 'docker tag sa-frontend:"$BUILD_NUMBER" harbor.devopsdoor.com/cicd_dev/sa-frontend:"$BUILD_NUMBER"'
+                sh 'docker tag sa-frontend:"$BUILD_NUMBER" http://harbor.devopsdoor.com/cicd_dev/sa-frontend:"$BUILD_NUMBER"'
                 sh 'docker tag sa-webapp:"$BUILD_NUMBER" harbor.devopsdoor.com/cicd_dev/sa-webapp:"$BUILD_NUMBER"'
                 sh 'docker tag sa-frontend:"$BUILD_NUMBER" harbor.devopsdoor.com/cicd_dev/sa-logic:"$BUILD_NUMBER"'
-                sh 'docker push harbor.devopsdoor.com/cicd_dev/sa-frontend:"$BUILD_NUMBER"'
+                sh 'docker push http://harbor.devopsdoor.com/cicd_dev/sa-frontend:"$BUILD_NUMBER"'
                 sh 'docker push harbor.devopsdoor.com/cicd_dev/sa-webapp:"$BUILD_NUMBER"'
                 sh 'docker push harbor.devopsdoor.com/cicd_dev/sa-logic:"$BUILD_NUMBER"'
                 }
