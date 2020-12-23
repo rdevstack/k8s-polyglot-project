@@ -24,6 +24,9 @@ pipeline {
             }
         }
         stage('push to dockerhub'){
+            when {
+                branch 'develop'
+                }
             steps {
                 withDockerRegistry([ credentialsId: "dockerhub", url: "" ]){
                 sh 'docker tag sa-frontend:"$BUILD_NUMBER" devopsdoor/sa-frontend:"$BUILD_NUMBER"'
@@ -65,5 +68,6 @@ pipeline {
                 }
             }
         }
+
     }
 }
