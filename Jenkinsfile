@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build App') {
             steps {
                 sh 'echo "Building Sa-Frontend"'
                 sh 'cd ${WORKSPACE}/sa-frontend && npm install && npm run build'
@@ -13,10 +13,13 @@ pipeline {
             steps {
                 sh 'echo "Creating fronted Image"'
                 sh 'cd ${WORKSPACE}/sa-frontend && docker build -t sa-frontend:"$BUILD_NUMBER" .'
-                sh 'echo "Creating webapp Image'
+                ah '"Frontend Image created'
+                sh 'echo "Creating webapp Image"'
                 sh 'cd ${WORKSPACE}/sa-webapp && docker build -t sa-webapp:"$BUILD_NUMBER" .'
-                sh 'echo "Creating sa-logic image'
+                sh '"Webapp Image Created"'
+                sh 'echo "Creating sa-logic image"'
                 sh 'cd ${WORKSPACE}/sa-logic && docker build -t sa-logic:"$BUILD_NUMBER" .'
+                sh 'echo "sa-logic image created"'
 
             }
         }
