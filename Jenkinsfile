@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-        stage('push to harbor registry'){
+        stage('push to harbor-dev'){
             when {
                 branch 'develop'
                 }
@@ -47,7 +47,7 @@ pipeline {
                 }
             }
         }
-        stage('push to harbor registry'){
+        stage('push to harbor-prod'){
             when {
                 branch 'master'
                 }
